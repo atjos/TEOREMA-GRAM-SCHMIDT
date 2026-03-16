@@ -4,10 +4,12 @@ import numpy as np
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     """Renderiza la página principal."""
     return render_template('index.html')
+
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
@@ -49,6 +51,14 @@ def calculate():
         return jsonify({"error": str(e)}), 400
     except Exception as e:
         return jsonify({"error": f"Error inesperado: {str(e)}"}), 500
+
+
+from flask import send_from_directory
+import os
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico')
 
 if __name__ == '__main__':
     # Ejecución en modo debug para desarrollo
