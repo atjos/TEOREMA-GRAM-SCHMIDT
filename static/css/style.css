@@ -1,0 +1,167 @@
+/* =========================================
+   VARIABLES Y CONFIGURACIÓN BASE
+   Extraídas de la paleta de azules proporcionada
+   ========================================= */
+:root {
+    --primary-color: #005f96;      /* Azul medio vibrante */
+    --primary-dark: #003b5c;       /* Azul marino profundo */
+    --secondary-color: #31708e;    /* Azul acero */
+    --success-color: #2d82a4;      /* Azul turquesa oscuro */
+    --info-color: #8cc0d4;         /* Azul cielo claro */
+    --dark-bg: #00213d;            /* El azul más oscuro de la paleta */
+    --light-bg: #f4f9fb;           /* Fondo basado en el tono más claro */
+    --card-shadow: 0 10px 30px rgba(0, 33, 61, 0.08);
+    --hover-shadow: 0 15px 45px rgba(0, 33, 61, 0.15);
+    --border-color: #b2d8e5;       /* El azul pastel final para bordes */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark-bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+}
+
+/* =========================================
+   TARJETAS Y CONTENEDORES
+   ========================================= */
+.card {
+    border: 1px solid rgba(178, 216, 229, 0.5);
+    border-radius: 16px;
+    background: #ffffff;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: var(--card-shadow) !important;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow) !important;
+    border-color: var(--info-color);
+}
+
+/* Botones con gradiente refinado */
+.btn {
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 95, 150, 0.3);
+    filter: brightness(110%);
+}
+
+/* Inputs de Vectores */
+.vector-input-group input {
+    text-align: center;
+    font-family: 'Fira Code', monospace;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    background-color: #fdfdfd;
+    transition: all 0.3s ease;
+    color: var(--primary-dark);
+}
+
+.vector-input-group input:focus {
+    border-color: var(--primary-color);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(0, 95, 150, 0.1);
+    outline: none;
+}
+
+/* =========================================
+   ZONA DE RESULTADOS Y MATEMÁTICAS
+   ========================================= */
+.step-box {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--info-color);
+    transition: all 0.3s ease;
+}
+
+.step-box:hover {
+    transform: translateX(8px);
+    border-left-color: var(--primary-color);
+    background: #fafcfe;
+}
+
+/* Contenedor de fórmulas */
+.math-display {
+    overflow-x: auto;
+    padding: 15px;
+    background: #f8fbfe;
+    border-radius: 8px;
+    color: var(--primary-dark);
+}
+
+/* Scrollbar personalizado estilo "Ice" */
+.math-display::-webkit-scrollbar {
+    height: 6px;
+}
+.math-display::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.math-display::-webkit-scrollbar-thumb {
+    background: var(--info-color);
+    border-radius: 10px;
+}
+.math-display::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+.projections-list {
+    border-left: 3px dashed var(--border-color);
+    padding-left: 20px;
+}
+
+/* =========================================
+   ANIMACIONES Y LOADER
+   ========================================= */
+.animate__fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#plot-loader .spinner-border {
+    color: var(--primary-color);
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+/* =========================================
+   GRÁFICO PLOTLY
+   ========================================= */
+#plot-container {
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+    background: white;
+    padding: 10px;
+}
+
+/* Estilo para los títulos de pasos u orden */
+h4, .step-title {
+    color: var(--primary-dark);
+    font-weight: 700;
+    border-bottom: 2px solid var(--light-bg);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
