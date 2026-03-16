@@ -1,18 +1,14 @@
-/* =========================================
-VARIABLES Y CONFIGURACIÓN BASE
-Extraídas de la paleta de azules proporcionada
-   ========================================= */
 :root {
-  --primary-color: #005f96; /* Azul medio vibrante */
-  --primary-dark: #003b5c; /* Azul marino profundo */
-  --secondary-color: #31708e; /* Azul acero */
-  --success-color: #2d82a4; /* Azul turquesa oscuro */
-  --info-color: #8cc0d4; /* Azul cielo claro */
-  --dark-bg: #00213d; /* El azul más oscuro de la paleta */
-  --light-bg: #f4f9fb; /* Fondo basado en el tono más claro */
+  --primary-color: #005f96; 
+  --primary-dark: #003b5c; 
+  --secondary-color: #31708e; 
+  --success-color: #2d82a4; 
+  --info-color: #8cc0d4; 
+  --dark-bg: #00213d; 
+  --light-bg: #f4f9fb; 
   --card-shadow: 0 10px 30px rgba(0, 33, 61, 0.08);
   --hover-shadow: 0 15px 45px rgba(0, 33, 61, 0.15);
-  --border-color: #b2d8e5; /* El azul pastel final para bordes */
+  --border-color: #b2d8e5; 
 }
 
 body {
