@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
     <title>Teorema de Gram-Schmidt - Visualizador en R³</title>
 
     <!-- Configuración Crítica de MathJax ANTES de cargar la librería -->
@@ -49,137 +53,140 @@
     />
   </head>
   <body class="bg-light">
+    <main>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <span class="navbar-brand fw-bold"
+            >📐 Teorema de <span class="text-info">Gram-Schmidt</span></span
+          >
+        </div>
+      </nav>
 
-<main>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-      <div class="container">
-        <span class="navbar-brand fw-bold"
-          >📐 Teorema de <span class="text-info">Gram-Schmidt</span></span
-        >
-      </div>
-    </nav>
+      <div class="container py-4">
+        <div class="row g-4">
+          <!-- Panel de Control -->
+          <div class="col-lg-4">
+            <div class="card border-0 shadow-sm rounded-4">
+              <div class="card-body p-4">
+                <h5 class="fw-bold mb-3">Vectores de Entrada</h5>
+                <p class="text-secondary small">
+                  Define una base $S = \{v_1, v_2, v_3\}$ en $\mathbb{R}^3$.
+                </p>
 
-    <div class="container py-4">
-      <div class="row g-4">
-        <!-- Panel de Control -->
-        <div class="col-lg-4">
-          <div class="card border-0 shadow-sm rounded-4 mb-4">
-            <div class="card-body p-4">
-              <h5 class="fw-bold mb-3">Vectores de Entrada</h5>
-              <p class="text-secondary small">
-                Define una base $S = \{v_1, v_2, v_3\}$ en $\mathbb{R}^3$.
-              </p>
+                <div id="vector-inputs">
+                  <!-- Vector 1 -->
+                  <div class="vector-input-group mb-3" data-index="0">
+                    <label class="small fw-semibold text-primary"
+                      >Vector $v_1$</label
+                    >
+                    <div class="row g-2">
+                      <div class="col-4">
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control form-control-sm coord-x"
+                          value="0"
+                          placeholder="x"
+                        />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control form-control-sm coord-y"
+                          value="0"
+                          placeholder="y"
+                        />
+                      </div>
+                      <div class="col-4">
+                        <input
+                          type="number"
+                          step="any"
+                          class="form-control form-control-sm coord-z"
+                          value="0"
+                          placeholder="z"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-              <div id="vector-inputs">
-                <!-- Vector 1 -->
-                <div class="vector-input-group mb-3" data-index="0">
-                  <label class="small fw-semibold text-primary"
-                    >Vector $v_1$</label
+                <div class="d-grid gap-2">
+                  <button
+                    id="add-vector"
+                    class="btn btn-outline-secondary btn-sm"
                   >
-                  <div class="row g-2">
-                    <div class="col-4">
-                      <input
-                        type="number"
-                        step="any"
-                        class="form-control form-control-sm coord-x"
-                        value="0"
-                        placeholder="x"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <input
-                        type="number"
-                        step="any"
-                        class="form-control form-control-sm coord-y"
-                        value="0"
-                        placeholder="y"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <input
-                        type="number"
-                        step="any"
-                        class="form-control form-control-sm coord-z"
-                        value="0"
-                        placeholder="z"
-                      />
-                    </div>
-                  </div>
+                    + Agregar Vector
+                  </button>
+                  <button
+                    id="calculate-btn"
+                    class="btn btn-primary fw-bold py-2"
+                  >
+                    CALCULAR LAS BASES
+                  </button>
+                  <button id="reset-btn" class="btn btn-light btn-sm mt-2">
+                    Reiniciar
+                  </button>
                 </div>
               </div>
+            </div>
 
-              <div class="d-grid gap-2">
-                <button
-                  id="add-vector"
-                  class="btn btn-outline-secondary btn-sm"
+            <!-- Card de Info -->
+            <div class="card border-0 shadow-sm rounded-4 bg-info text-white">
+              <div class="card-body p-4">
+                <h6 class="fw-bold">
+                  <i class="bi bi-info-circle"></i> Ayuda Didáctica
+                </h6>
+                <p class="small mb-0">
+                  Recuerda que para obtener una base, los vectores deben ser
+                  <strong>linealmente independientes</strong>. El gráfico
+                  mostrará la transformación en tiempo real.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gráfico 3D -->
+          <div class="col-lg-8">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+              <div class="card-body p-0 position-relative">
+                <div id="plot-container"></div>
+                <div
+                  id="plot-loader"
+                  class="position-absolute top-50 start-50 translate-middle d-none"
                 >
-                  + Agregar Vector
-                </button>
-                <button id="calculate-btn" class="btn btn-primary fw-bold py-2">
-                  CALCULAR LAS BASES
-                </button>
-                <button id="reset-btn" class="btn btn-light btn-sm mt-2">
-                  Reiniciar
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card de Info -->
-          <div class="card border-0 shadow-sm rounded-4 bg-info text-white">
-            <div class="card-body p-4">
-              <h6 class="fw-bold">
-                <i class="bi bi-info-circle"></i> Ayuda Didáctica
-              </h6>
-              <p class="small mb-0">
-                Recuerda que para obtener una base, los vectores deben ser
-                <strong>linealmente independientes</strong>. El gráfico mostrará
-                la transformación en tiempo real.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Gráfico 3D -->
-        <div class="col-lg-8">
-          <div class="card border-0 shadow-sm rounded-4 h-100">
-            <div class="card-body p-0 position-relative">
-              <div
-                id="plot-container"
-                style="min-height: 550px; width: 100%"
-              ></div>
-              <div
-                id="plot-loader"
-                class="position-absolute top-50 start-50 translate-middle d-none"
-              >
-                <div class="spinner-border text-primary" role="status"></div>
+                  <div class="spinner-border text-primary" role="status"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Resultados y Explicación -->
-      <div id="results-area" class="mt-5 d-none">
-        <div class="row justify-content-center">
-          <div class="col-12">
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-              <div class="card-header bg-white py-3">
-                <h4 class="mb-0 fw-bold text-center text-dark">
-                  Desarrollo Matemático
-                </h4>
-              </div>
-              <div class="card-body p-4 bg-white">
-                <div id="steps-content"></div>
+        <!-- Resultados y Explicación -->
+        <div id="results-area" class="mt-5 d-none">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white py-3">
+                  <h4 class="mb-0 fw-bold text-center text-dark">
+                    Desarrollo Matemático
+                  </h4>
+                </div>
+                <div class="card-body p-4 bg-white">
+                  <div id="steps-content"></div>
 
-                <div class="row mt-5 pt-4 border-top">
-                  <div class="col-md-6 text-center border-end">
-                    <h5 class="fw-bold text-primary">Base Ortogonal ($U$)</h5>
-                    <div id="final-ortho" class="fs-5 mt-3"></div>
-                  </div>
-                  <div class="col-md-6 text-center">
-                    <h5 class="fw-bold text-success">Base Ortonormal ($E$)</h5>
-                    <div id="final-norm" class="fs-5 mt-3"></div>
+                  <div class="row mt-5 pt-4 border-top text-center">
+                    <div class="col-12 col-md-6 mb-4 mb-md-0 border-md-end">
+                      <h5 class="fw-bold text-primary">Base Ortogonal ($U$)</h5>
+                      <div id="final-ortho" class="fs-5 mt-3 math-box"></div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <h5 class="fw-bold text-success">
+                        Base Ortonormal ($E$)
+                      </h5>
+                      <div id="final-norm" class="fs-5 mt-3 math-box"></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -187,14 +194,12 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     </main>
 
-
     <footer>
-    <p>© 2026 Juan José Mendoza. Todos los derechos reservados.</p>
-</footer>
+      <p>© 2026 Juan José Mendoza. Todos los derechos reservados.</p>
+    </footer>
   </body>
 </html>
